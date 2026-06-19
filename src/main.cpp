@@ -1,18 +1,15 @@
-#include <Arduino.h>
+﻿#include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const int ledPin = 13; // ขา LED บนบอร์ด Arduino UNO
+const unsigned long blinkInterval = 500; // ระยะเวลาเปิด/ปิด 500 ms
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  digitalWrite(ledPin, HIGH); // เปิดไฟ LED
+  delay(blinkInterval);
+  digitalWrite(ledPin, LOW); // ปิดไฟ LED
+  delay(blinkInterval);
 }
