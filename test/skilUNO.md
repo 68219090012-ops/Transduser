@@ -49,7 +49,49 @@
 - อัพโหลดสเก็ตช์ตัวอย่าง เช่น Blink เพื่อทดสอบ LED บนขา D13
 - อ่านค่าเซ็นเซอร์จากขาแอนะล็อก หรือควบคุมมอเตอร์ด้วยขา PWM
 
-## 9. ข้อควรระวัง
+## 9. ตัวอย่างการใช้งาน DHT11 อ่านอุณหภูมิและความชื้น
+- ขา DATA ของ DHT11 ต่อกับขา D4 ของ Arduino
+- ขา VCC ของ DHT11 ต่อกับ 5V
+- ขา GND ของ DHT11 ต่อกับ GND
+- ใส่ตัวต้านทาน pull-up 4.7kΩ - 10kΩ ระหว่าง DATA และ VCC
+
+ตัวอย่างโค้ดสำหรับอ่านค่า DHT11 และส่งค่าไปยัง Serial Monitor:
+
+```cpp
+#include <Arduino.h>
+#include <DHT.h>
+
+#define DHTPIN 4
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("อ่านค่า DHT11 ไม่สำเร็จ");
+  } else {
+    Serial.print("อุณหภูมิ: ");
+    Serial.print(temperature);
+    Serial.println(" °C");
+
+    Serial.print("ความชื้น: ");
+    Serial.print(humidity);
+    Serial.println(" %RH");
+  }
+
+  delay(2000);
+}
+```
+
+## 10. ข้อควรระวัง
 - ระวังแรงดันไฟฟ้าที่จ่ายเข้า VIN และ 5V ไม่เกินค่าที่บอร์ดรองรับ
 - ห้ามต่อขา I/O เข้ากับแรงดันที่สูงกว่า 5V โดยตรง
 - ก่อนเชื่อมต่อสายกับเซ็นเซอร์หรือมอเตอร์ ควรตรวจสอบขั้วและแรงดันให้ถูกต้อง
