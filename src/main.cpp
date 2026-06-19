@@ -1,15 +1,33 @@
-﻿#include <Arduino.h>
+﻿
+#include <DHT.h>
 
-const int ledPin = 13; // ขา LED บนบอร์ด Arduino UNO
-const unsigned long blinkInterval = 500; // ระยะเวลาเปิด/ปิด 500 ms
+#define DHTPIN 4
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+  dht.begin();
 }
 
 void loop() {
-  digitalWrite(ledPin, HIGH); // เปิดไฟ LED
-  delay(blinkInterval);
-  digitalWrite(ledPin, LOW); // ปิดไฟ LED
-  delay(blinkInterval);
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("อ่านค่า DHT11 ไม่สำเร็จ");
+  } else {
+    Serial.print("อุณหภูมิ: ");
+    Serial.print(temperature);
+    Serial.println(" °C");
+
+    Serial.print("ความชื้น: ");
+    Serial.print(humidity);
+    Serial.println(" %RH");
+  }
+
+  delay(2000);
 }
+
+
