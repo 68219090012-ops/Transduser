@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+  <rect width="900" height="500" fill="#f7f9fc"/>
+  <rect x="120" y="120" width="280" height="220" rx="16" fill="#ffffff" stroke="#2f3e46" stroke-width="3"/>
+  <rect x="150" y="150" width="220" height="140" rx="10" fill="#eef2f7" stroke="#4a5568" stroke-width="2"/>
+  <circle cx="220" cy="220" r="34" fill="#e53e3e" stroke="#822727" stroke-width="3"/>
+  <rect x="280" y="190" width="55" height="18" rx="4" fill="#f6ad55"/>
+  <rect x="280" y="215" width="70" height="18" rx="4" fill="#5a67d8"/>
+  <rect x="150" y="320" width="220" height="12" rx="6" fill="#cbd5e0"/>
+  <rect x="170" y="340" width="28" height="24" rx="4" fill="#2d3748"/>
+  <rect x="205" y="340" width="28" height="24" rx="4" fill="#2d3748"/>
+  <rect x="240" y="340" width="28" height="24" rx="4" fill="#2d3748"/>
+  <rect x="275" y="340" width="28" height="24" rx="4" fill="#2d3748"/>
+  <rect x="310" y="340" width="28" height="24" rx="4" fill="#2d3748"/>
+  <text x="150" y="100" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#1f2937">KY-026 Flame Sensor Module</text>
+  <text x="470" y="190" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">Pinout</text>
+  <rect x="470" y="210" width="260" height="160" rx="12" fill="#ffffff" stroke="#2f3e46" stroke-width="2"/>
+  <line x1="510" y1="250" x2="650" y2="250" stroke="#4a5568" stroke-width="2"/>
+  <circle cx="510" cy="250" r="8" fill="#38a169"/>
+  <circle cx="570" cy="250" r="8" fill="#718096"/>
+  <circle cx="630" cy="250" r="8" fill="#f6ad55"/>
+  <circle cx="690" cy="250" r="8" fill="#805ad5"/>
+  <text x="500" y="285" font-family="Arial, sans-serif" font-size="18" fill="#1f2937">VCC</text>
+  <text x="560" y="285" font-family="Arial, sans-serif" font-size="18" fill="#1f2937">GND</text>
+  <text x="618" y="285" font-family="Arial, sans-serif" font-size="18" fill="#1f2937">DO</text>
+  <text x="678" y="285" font-family="Arial, sans-serif" font-size="18" fill="#1f2937">AO</text>
+  <text x="470" y="390" font-family="Arial, sans-serif" font-size="18" fill="#4a5568">ภาพสรุปแบบง่ายของโมดูล KY-026</text>
+</svg>
