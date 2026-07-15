@@ -1,66 +1,56 @@
 ﻿#include <Arduino.h>
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-// ขาต่อของเซ็นเซอร์ KY-026
-const int sensorAnalogPin = A0;  // AO
-const int sensorDigitalPin = 2;  // DO
-const int buzzerPin = 3;         // optional buzzer
-const int ledPin = 13;           // LED บนบอร์ด
+#define AO_PIN A3
 
-// ขาต่อของ LCD 16x2
-const int rs = 7;
-const int en = 8;
-const int d4 = 9;
-const int d5 = 10;
-const int d6 = 11;
-const int d7 = 12;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// ค่าเกณฑ์สำหรับการแจ้งเตือน
-const int threshold = 600;
-
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+// ปรับค่า Threshold ตามค่าที่อ่านได้จริง
+const int threshold = 500;
 
 void setup() {
-  pinMode(sensorDigitalPin, INPUT);
-  pinMode(buzzerPin, OUTPUT);
-  pinMode(ledPin, OUTPUT);
 
-  digitalWrite(buzzerPin, LOW);
-  digitalWrite(ledPin, LOW);
+  Serial.begin(9600);
 
-  lcd.begin(16, 2);
-  lcd.clear();
+  lcd.init();
+  lcd.backlight();
+
   lcd.setCursor(0, 0);
   lcd.print("KY-026 Monitor");
   lcd.setCursor(0, 1);
-  lcd.print("Initializing...");
-  delay(1500);
+  lcd.print("System Ready");
+  delay(2000);
+
+  lcd.clear();
 }
 
 void loop() {
-  int analogValue = analogRead(sensorAnalogPin);
-  int digitalValue = digitalRead(sensorDigitalPin);
 
-  bool detected = (analogValue >= threshold) || (digitalValue == LOW);
+  // อ่านค่าจากเซ็นเซอร์
+  int analogValue = analogRead(AO_PIN);
 
-  lcd.clear();
-  lcd.setCursor(0, 0);
+  // แสดงค่าใน Serial Monitor
+  Serial.print("Analog = ");
+  Serial.println(analogValue);
 
-  if (detected) {
-    digitalWrite(ledPin, HIGH);
-    digitalWrite(buzzerPin, HIGH);
-    lcd.print("WARNING! FIRE");
-    lcd.setCursor(0, 1);
-    lcd.print("Value:");
-    lcd.print(analogValue);
+  // ตรวจสอบการพบเปลวไฟ
+  if (analogValue < threshold) {
+
+    lcd.setCursor(0, 0);
+    lcd.print("WARNING! FIRE ");
+
   } else {
-    digitalWrite(ledPin, LOW);
-    digitalWrite(buzzerPin, LOW);
+
+    lcd.setCursor(0, 0);
     lcd.print("Status: NORMAL");
-    lcd.setCursor(0, 1);
-    lcd.print("Value:");
-    lcd.print(analogValue);
   }
 
-  delay(500);
+  // แสดงค่าเซ็นเซอร์
+  lcd.setCursor(0, 1);
+  lcd.print("Value:");
+  lcd.print(analogValue);
+  lcd.print("    ");
+
+  delay(300);
 }
